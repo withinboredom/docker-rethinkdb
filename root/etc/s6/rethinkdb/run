@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sleep 3
+s6-svcwait -u consul
 
 joiner=`dig @$MASTER rethinkdb-intracluster.service.consul +short`
 
