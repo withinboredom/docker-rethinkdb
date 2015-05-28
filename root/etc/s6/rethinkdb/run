@@ -1,6 +1,6 @@
 #!/bin/bash
 
-s6-svcwait -u consul
+s6-svwait -u consul
 
 joiner=`dig @$MASTER rethinkdb-intracluster.service.consul +short`
 
@@ -19,14 +19,14 @@ echo "Have current ip: $currentIp"
 if [ -z "$joiner" ]
 then
 	echo "Starting a cluster!"
-	exec rethinkdb --bind all "$@"
+	exec rethinkdb --bind all "$@" 2>&1
 else
 	if [ "$joiner" == "$currentIp" ]
 	then
 		echo "Starting a cluster!"
-		exec rethinkdb --bind all "$@"
+		exec rethinkdb --bind all "$@" 2>&1
 	else
 		echo "Joining a cluster!!!"
-		exec rethinkdb --bind all --join "$joiner" "$@"
+		exec rethinkdb --bind all --join "$joiner" "$@" 2>&1
 	fi
 fi
