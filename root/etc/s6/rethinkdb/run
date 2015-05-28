@@ -27,6 +27,6 @@ else
 		exec rethinkdb --bind all "$@" 2>&1
 	else
 		echo "Joining a cluster!!!"
-		exec rethinkdb --bind all --join "$joiner" "$@" 2>&1
+		exec rethinkdb --bind all --join "$joiner" "$@"
 	fi
 fi
