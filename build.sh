@@ -4,5 +4,6 @@
 #/vagrant/consul-ui/build.sh
 #/vagrant/consul-agent/build.sh
 
-docker build -t withinboredom/rethinkdb rethinkdb
+docker tag -f withinboredom/consul-agent withinboredom/rethinkdb:base
+docker build -t withinboredom/rethinkdb:latest rethinkdb
 #docker push withinboredom/rethinkdb
