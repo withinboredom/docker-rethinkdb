@@ -4,10 +4,10 @@ MAINTAINER Robert Landers <landers.robert@gmail.com>
 
 # Add the RethinkDB repository and public key
 # "RethinkDB Packaging <packaging@rethinkdb.com>" http://download.rethinkdb.com/apt/pubkey.gpg
-RUN apt-key adv --keyserver pgp.mit.edu --recv-keys 1614552E5765227AEC39EFCFA7E00EF33A8F2399 2>/dev/null
-RUN echo "deb http://download.rethinkdb.com/apt trusty main" > /etc/apt/sources.list.d/rethinkdb.list
+RUN . /etc/lsb-release && echo "deb http://download.rethinkdb.com/apt $DISTRIB_CODENAME main" | sudo tee /etc/apt/sources.list.d/rethinkdb.list
+RUN wget -qO- http://download.rethinkdb.com/apt/pubkey.gpg | sudo apt-key add -
 
-ENV RETHINKDB_PACKAGE_VERSION 2.1.2~0trusty
+ENV RETHINKDB_PACKAGE_VERSION 2.1.4~0trusty
 
 RUN apt-get update \
 	&& apt-get install -y rethinkdb=$RETHINKDB_PACKAGE_VERSION 2>/dev/null \
